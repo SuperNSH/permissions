@@ -1,0 +1,18 @@
+{
+  "name": "nsh-permissions",
+  "version": "0.1.0",
+  "description": "Runtime permissions for Native Shell TSX apps: check, request and open settings for sixteen kinds, with permission_handler's names",
+  "license": "MIT",
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./rust": "./src/rust.ts",
+    "./memory": "./src/memory.ts"
+  },
+  "files": [
+    "src"
+  ],
+  "repository": "https://github.com/SuperNSH/permissions"
+}

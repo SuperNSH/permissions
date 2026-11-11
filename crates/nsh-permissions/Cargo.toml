@@ -1,0 +1,21 @@
+[package]
+name = "nsh-permissions"
+description = "Check, request and open settings for camera, microphone, photos, location, notifications and more."
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+authors.workspace = true
+publish = false
+
+[lib]
+name = "nsh_permissions"
+path = "src/lib.rs"
+
+[dependencies]
+nsh-core = "0.4.0"
+thiserror = "2.0.21"
+tokio = { version = "1.54.1", default-features = false, features = ["sync", "time"] }
+
+[dev-dependencies]
+tokio = { version = "1.54.1", default-features = false, features = ["rt", "time", "macros"] }
