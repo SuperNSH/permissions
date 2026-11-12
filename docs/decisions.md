@@ -16,9 +16,9 @@ Decided 2026-11-09. The brief's research found no Rust crate that covers runtime
 
 Decided 2026-11-09. The first release covers every platform an NSH app ships on, with pure-logic bridges and no OS crates: the real OS bindings are the NSH-host integration point, and until the host wires them the production raw seams resolve `Err(BridgeUnavailable)`, stated honestly. That answer is coded, never panics, never hangs, and never reports a silent `denied`. Linux supports nothing by design: there is no permission broker to talk to, so every kind resolves `ERR_PERMISSIONS_UNSUPPORTED_PLATFORM` at once.
 
-### NSH version: nsh-core 0.4.0
+### NSH version: nsh-core 0.5.0
 
-Decided 2026-11-09. NSH 0.4.0 is the released line the sibling libraries build on: `.refs/biometrics` pins `nsh-core = "0.4.0"`, with `nsh-engine` and `nsh-testing` 0.4.0 as dev-dependencies. This crate matches it, so the native module, the headless test driver and the TSX package all line up with the same engine.
+Decided 2026-11-09 on 0.4.0; moved to 0.5.0 on 2026-11-12 with the sibling libraries. Every SuperNSH library pins `nsh-core = "0.5.0"`, with `nsh-engine` and `nsh-testing` 0.5.0 as dev-dependencies where it has them. This crate matches them, so the native module, the headless test driver and the TSX package all line up with the same engine.
 
 ### The Android rationale rule was amended
 
