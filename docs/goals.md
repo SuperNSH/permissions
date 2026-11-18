@@ -13,11 +13,11 @@ Failures carry stable codes, never a silent `denied`. A missing host bridge repo
 
 ## 2. Acceptance criteria
 
-- [ ] The frozen API surface is implemented in Rust (`crates/nsh-permissions`) and TypeScript (`packages/nsh-permissions`) with identical wire names: the sixteen kind strings and the five status strings are byte-identical on both sides.
-- [ ] Every behaviour row has a test under its canonical name below, in both suites where the row applies. The bridge modules compile on every host, so every bridge's tests run on every CI runner.
-- [ ] The gates are green in CI, exactly the jobs `.github/workflows/ci.yml` runs: `format` with `cargo fmt --all -- --check`; `rust` on the Linux, macOS and Windows matrix with `cargo clippy --all-targets -- -D warnings` then `cargo test --all-targets`; `cross-check` for the iOS-simulator, Android and wasm targets with `cargo clippy --all-targets --target <target> -- -D warnings`; and `typescript` on `packages/nsh-permissions` with `nsh check`, `nsh build` passing with no warnings, and `nsh test`. A gate with no passing run is pending, not verified; `docs/parity.md` records the current state.
-- [ ] No panic on any input: no `unwrap` or `expect` on external data, and a scripted hostile backend gets coded errors out, never a panic.
-- [ ] No call hangs past its deadline: requests 30 s and queries 10 s by default (`Timeouts`), enforced by the facade.
+- [x] The frozen API surface is implemented in Rust (`crates/nsh-permissions`) and TypeScript (`packages/nsh-permissions`) with identical wire names: the sixteen kind strings and the five status strings are byte-identical on both sides.
+- [x] Every behaviour row has a test under its canonical name below, in both suites where the row applies. The bridge modules compile on every host, so every bridge's tests run on every CI runner.
+- [x] The gates are green in CI, exactly the jobs `.github/workflows/ci.yml` runs: `format` with `cargo fmt --all -- --check`; `rust` on the Linux, macOS and Windows matrix with `cargo clippy --all-targets -- -D warnings` then `cargo test --all-targets`; `cross-check` for the iOS-simulator, Android and wasm targets with `cargo clippy --all-targets --target <target> -- -D warnings`; and `typescript` on `packages/nsh-permissions` with `nsh check`, `nsh build` passing with no warnings, and `nsh test`. All of these jobs are green on master (run 44376370620); `docs/parity.md` records the current state.
+- [x] No panic on any input: no `unwrap` or `expect` on external data, and a scripted hostile backend gets coded errors out, never a panic.
+- [x] No call hangs past its deadline: requests 30 s and queries 10 s by default (`Timeouts`), enforced by the facade.
 
 ### Canonical test names
 
@@ -40,7 +40,7 @@ In both suites:
 
 Rust only: the mapping lives in the bridge, and the TypeScript suite runs the memory and web backends, not the native bridges. `ios_prompt_once_then_permanent_denial`, `ios_limited_photos_is_distinct`, `ios_restricted_surfaces_as_restricted` (`src/platform/apple.rs`); `android_notification_denial_is_inferred_from_rationale`, `android_target_sdk_32_never_shows_the_dialog`, `android_undeclared_kind_never_prompts`, `android_restricted_surfaces_as_restricted`, `android_unsupported_kinds_are_coded` (`src/platform/android.rs`); `windows_privacy_disabled_reports_service_disabled`, `windows_unsupported_kinds_are_coded` (`src/platform/windows.rs`); `linux_every_kind_is_coded_unsupported` (`src/platform/linux.rs`).
 
-Rust paths are under `crates/nsh-permissions/`, TypeScript paths under `packages/nsh-permissions/`. The package's `App.tsx` screen, which runs `check("camera")` and shows the resulting status, lands in this same changeset with its `tests/app.test.tsx`; that coverage is CI-pending until a run executes it.
+Rust paths are under `crates/nsh-permissions/`, TypeScript paths under `packages/nsh-permissions/`. The package's `App.tsx` screen, which runs `check("camera")` and shows the resulting status, has its `tests/app.test.tsx`, run by the `typescript` job.
 
 ## 3. The error enum
 

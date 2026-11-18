@@ -2,11 +2,11 @@
 
 One row per public API item of Flutter's `permission_handler` 13.0.2 (platform interface 4.4.1) and `react-native-permissions` 5.6.3, both read from `.refs/` on 2026-11-09, and what this library does with it. Section 1 is our own API, the yardstick for every row below.
 
-No CI run has passed for the permissions implementation: the only green run (42565023126) is the initial scaffold commit, before any of this code. Every **Implemented** row below reads *implemented in this checkout; CI run pending*. AGENTS.md: a claim with no passing run is unverified.
+Verified by CI: run 44376370620 on master (https://github.com/SuperNSH/permissions/actions/runs/44376370620) is green on every job: `format`, `rust` on ubuntu, macos and windows (clippy `-D warnings`, then `cargo test --all-targets`), `check` for aarch64-apple-ios-sim, aarch64-linux-android and wasm32-unknown-unknown, and `typescript` (`nsh check`, `nsh build` with no warnings, `nsh test`, including `tests/app.test.tsx`). Every **Implemented** row below is covered by a test that run executed. What no run can show is a device answering: see section 4 and the Blocked list in the README.
 
 Status words:
 
-- **Implemented (CI pending)**: coded in this checkout, with the named test. The platform bridges are pure logic this release: every mapping is tested against a scripted raw seam, and every production seam (the NSH host integration point) answers `ERR_PERMISSIONS_BRIDGE_UNAVAILABLE`, so no device has answered anything yet. A missing bridge is a coded error, never a silent `denied`.
+- **Implemented (CI green)**: coded, with the named test passing in the run above. The platform bridges are pure logic this release: every mapping is tested against a scripted raw seam, and every production seam (the NSH host integration point) answers `ERR_PERMISSIONS_BRIDGE_UNAVAILABLE`, so no device has answered anything yet. A missing bridge is a coded error, never a silent `denied`.
 - **Not this release**: out of scope; section 4 says why and what stands in.
 - **Not applicable**: no counterpart in our API; the row says why.
 
@@ -117,44 +117,44 @@ All 41 values, in the order `Permission.values` lists them.
 
 | `permission_handler` | Here | Status | Covered by |
 |---|---|---|---|
-| `calendar` (deprecated) | `Calendar` (adapted: one kind where Flutter is deprecating for a read/write split) | Implemented (CI pending) | `support_matrix_matches_the_spec` |
-| `camera` | `Camera` (same name) | Implemented (CI pending) | `support_matrix_matches_the_spec` |
-| `contacts` | `Contacts` (same name) | Implemented (CI pending) | `support_matrix_matches_the_spec` |
-| `location` | `Location` (same name) | Implemented (CI pending) | `support_matrix_matches_the_spec` |
-| `locationAlways` | `LocationAlways` (same name) | Implemented (CI pending) | `support_matrix_matches_the_spec` |
-| `locationWhenInUse` | `LocationWhenInUse` (same name) | Implemented (CI pending) | `support_matrix_matches_the_spec` |
-| `mediaLibrary` | `MediaLibrary` (same name) | Implemented (CI pending) | `support_matrix_matches_the_spec` |
-| `microphone` | `Microphone` (same name) | Implemented (CI pending) | `support_matrix_matches_the_spec` |
+| `calendar` (deprecated) | `Calendar` (adapted: one kind where Flutter is deprecating for a read/write split) | Implemented (CI green) | `support_matrix_matches_the_spec` |
+| `camera` | `Camera` (same name) | Implemented (CI green) | `support_matrix_matches_the_spec` |
+| `contacts` | `Contacts` (same name) | Implemented (CI green) | `support_matrix_matches_the_spec` |
+| `location` | `Location` (same name) | Implemented (CI green) | `support_matrix_matches_the_spec` |
+| `locationAlways` | `LocationAlways` (same name) | Implemented (CI green) | `support_matrix_matches_the_spec` |
+| `locationWhenInUse` | `LocationWhenInUse` (same name) | Implemented (CI green) | `support_matrix_matches_the_spec` |
+| `mediaLibrary` | `MediaLibrary` (same name) | Implemented (CI green) | `support_matrix_matches_the_spec` |
+| `microphone` | `Microphone` (same name) | Implemented (CI green) | `support_matrix_matches_the_spec` |
 | `phone` | none (telephony is outside the 16 kinds) | Not this release | section 4 |
-| `photos` | `Photos` (same name) | Implemented (CI pending) | `support_matrix_matches_the_spec`; `ios_limited_photos_is_distinct` |
-| `photosAddOnly` | `PhotosAddOnly` (same name; apple only in the matrix) | Implemented (CI pending) | `support_matrix_matches_the_spec` |
-| `reminders` | `Reminders` (same name; apple only) | Implemented (CI pending) | `support_matrix_matches_the_spec` |
-| `sensors` | `Motion` (adapted: `react-native-permissions`' name; one kind for CoreMotion and the Android body-sensor permissions) | Implemented (CI pending) | `support_matrix_matches_the_spec` |
+| `photos` | `Photos` (same name) | Implemented (CI green) | `support_matrix_matches_the_spec`; `ios_limited_photos_is_distinct` |
+| `photosAddOnly` | `PhotosAddOnly` (same name; apple only in the matrix) | Implemented (CI green) | `support_matrix_matches_the_spec` |
+| `reminders` | `Reminders` (same name; apple only) | Implemented (CI green) | `support_matrix_matches_the_spec` |
+| `sensors` | `Motion` (adapted: `react-native-permissions`' name; one kind for CoreMotion and the Android body-sensor permissions) | Implemented (CI green) | `support_matrix_matches_the_spec` |
 | `sms` | none (messaging is outside the 16 kinds) | Not this release | section 4 |
-| `speech` | `Speech` (same name) | Implemented (CI pending) | `support_matrix_matches_the_spec` |
+| `speech` | `Speech` (same name) | Implemented (CI green) | `support_matrix_matches_the_spec` |
 | `storage` | none (storage is not a runtime permission we model) | Not this release | section 4 |
 | `ignoreBatteryOptimizations` | none (a special consent) | Not this release | section 4 |
-| `notification` | `Notifications` (adapted: plural, wire string `notifications`; one kind for the plain notification permission) | Implemented (CI pending) | `support_matrix_matches_the_spec`; `android_notification_denial_is_inferred_from_rationale` |
+| `notification` | `Notifications` (adapted: plural, wire string `notifications`; one kind for the plain notification permission) | Implemented (CI green) | `support_matrix_matches_the_spec`; `android_notification_denial_is_inferred_from_rationale` |
 | `accessMediaLocation` | none (a special consent) | Not this release | section 4 |
-| `activityRecognition` | `Motion` (adapted: folds in beside `sensors`) | Implemented (CI pending) | `support_matrix_matches_the_spec` |
+| `activityRecognition` | `Motion` (adapted: folds in beside `sensors`) | Implemented (CI green) | `support_matrix_matches_the_spec` |
 | `unknown` | none (a sentinel Flutter never lets you request) | Not applicable | — |
-| `bluetooth` | `Bluetooth` (same name) | Implemented (CI pending) | `support_matrix_matches_the_spec` |
+| `bluetooth` | `Bluetooth` (same name) | Implemented (CI green) | `support_matrix_matches_the_spec` |
 | `manageExternalStorage` | none (storage is out of scope) | Not this release | section 4 |
 | `systemAlertWindow` | none (a special consent, not a runtime permission dialog) | Not this release | section 4 |
 | `requestInstallPackages` | none (same) | Not this release | section 4 |
-| `appTrackingTransparency` | `AppTrackingTransparency` (same name; apple only) | Implemented (CI pending) | `support_matrix_matches_the_spec` |
+| `appTrackingTransparency` | `AppTrackingTransparency` (same name; apple only) | Implemented (CI green) | `support_matrix_matches_the_spec` |
 | `criticalAlerts` | none (section 4) | Not this release | section 4 |
 | `accessNotificationPolicy` | none (do-not-disturb access, a special consent) | Not this release | section 4 |
-| `bluetoothScan` | `Bluetooth` (adapted: the Android 12 granular split folds into one kind) | Implemented (CI pending) | `support_matrix_matches_the_spec` |
-| `bluetoothAdvertise` | `Bluetooth` (same fold) | Implemented (CI pending) | `support_matrix_matches_the_spec` |
-| `bluetoothConnect` | `Bluetooth` (same fold) | Implemented (CI pending) | `support_matrix_matches_the_spec` |
+| `bluetoothScan` | `Bluetooth` (adapted: the Android 12 granular split folds into one kind) | Implemented (CI green) | `support_matrix_matches_the_spec` |
+| `bluetoothAdvertise` | `Bluetooth` (same fold) | Implemented (CI green) | `support_matrix_matches_the_spec` |
+| `bluetoothConnect` | `Bluetooth` (same fold) | Implemented (CI green) | `support_matrix_matches_the_spec` |
 | `nearbyWifiDevices` | none (a special consent) | Not this release | section 4 |
 | `videos` | none (media libraries beyond photos are out of scope) | Not this release | section 4 |
 | `audio` | none (same) | Not this release | section 4 |
 | `scheduleExactAlarm` | none (a special consent) | Not this release | section 4 |
 | `sensorsAlways` | none (background sensors, a special consent) | Not this release | section 4 |
-| `calendarWriteOnly` | `Calendar` (adapted: the iOS 16 write-only/full split is not modelled) | Implemented (CI pending) | `support_matrix_matches_the_spec` |
-| `calendarFullAccess` | `Calendar` (same fold) | Implemented (CI pending) | `support_matrix_matches_the_spec` |
+| `calendarWriteOnly` | `Calendar` (adapted: the iOS 16 write-only/full split is not modelled) | Implemented (CI green) | `support_matrix_matches_the_spec` |
+| `calendarFullAccess` | `Calendar` (same fold) | Implemented (CI green) | `support_matrix_matches_the_spec` |
 | `assistant` | none (SiriKit, section 4) | Not this release | section 4 |
 | `backgroundRefresh` | none (a status read, not a consent) | Not this release | section 4 |
 | `accessLocalNetwork` | none (out of scope this release) | Not this release | section 4 |
@@ -163,27 +163,27 @@ All 41 values, in the order `Permission.values` lists them.
 
 | `permission_handler` | Here | Status | Covered by |
 |---|---|---|---|
-| `denied` | `Denied` (`denied`; same name) | Implemented (CI pending) | `status_wire_names_round_trip` |
-| `granted` | `Granted` (`granted`; same name) | Implemented (CI pending) | `status_wire_names_round_trip` |
-| `restricted` | `Restricted` (`restricted`; same name. MDM and parental controls, surfaced on apple and android) | Implemented (CI pending) | `status_wire_names_round_trip`; `ios_restricted_surfaces_as_restricted` |
-| `limited` | `Limited` (`limited`; same name. Reachable only for photos, photosAddOnly and mediaLibrary on apple) | Implemented (CI pending) | `status_wire_names_round_trip`; `ios_limited_photos_is_distinct` |
-| `permanentlyDenied` | `PermanentlyDenied` (`permanentlyDenied`; same name. On android inferred from the rationale flag going false after a denial, Android having no permanent-denial API) | Implemented (CI pending) | `status_wire_names_round_trip`; `android_notification_denial_is_inferred_from_rationale` |
+| `denied` | `Denied` (`denied`; same name) | Implemented (CI green) | `status_wire_names_round_trip` |
+| `granted` | `Granted` (`granted`; same name) | Implemented (CI green) | `status_wire_names_round_trip` |
+| `restricted` | `Restricted` (`restricted`; same name. MDM and parental controls, surfaced on apple and android) | Implemented (CI green) | `status_wire_names_round_trip`; `ios_restricted_surfaces_as_restricted` |
+| `limited` | `Limited` (`limited`; same name. Reachable only for photos, photosAddOnly and mediaLibrary on apple) | Implemented (CI green) | `status_wire_names_round_trip`; `ios_limited_photos_is_distinct` |
+| `permanentlyDenied` | `PermanentlyDenied` (`permanentlyDenied`; same name. On android inferred from the rationale flag going false after a denial, Android having no permanent-denial API) | Implemented (CI green) | `status_wire_names_round_trip`; `android_notification_denial_is_inferred_from_rationale` |
 | `provisional` | none (not modelled: the five statuses have no provisional value, and no bridge implements or tests a provisional path this release) | Not this release | section 4 |
 
 ### Methods and helpers
 
 | `permission_handler` | Here | Status | Covered by |
 |---|---|---|---|
-| `Permission.status` (the check) | `Permissions::check(kind)` / `Permissions.check(kind)` | Implemented (CI pending) | `every_kind_reaches_the_caller_with_its_code` |
-| `Permission.request()` | `request(kind)` (same shape; one request in flight per kind) | Implemented (CI pending) | `second_request_while_one_runs_is_in_progress` |
+| `Permission.status` (the check) | `Permissions::check(kind)` / `Permissions.check(kind)` | Implemented (CI green) | `every_kind_reaches_the_caller_with_its_code` |
+| `Permission.request()` | `request(kind)` (same shape; one request in flight per kind) | Implemented (CI green) | `second_request_while_one_runs_is_in_progress` |
 | `List<Permission>.request()` (batch) | not a method (compose over the single-kind calls; each call resolves once, and the same kind twice answers `ERR_PERMISSIONS_IN_PROGRESS`) | Not applicable | `a_call_resolves_exactly_once` |
 | `shouldShowRequestRationale` | not public (the android bridge reads the rationale flag itself to infer `PermanentlyDenied` when the flag goes false) | Not applicable | `android_notification_denial_is_inferred_from_rationale` |
 | `onDeniedCallback`, `onGrantedCallback`, `onPermanentlyDeniedCallback`, `onRestrictedCallback`, `onLimitedCallback`, `onProvisionalCallback` | none (ours returns the status or a coded error; the app wires its own reactions) | Not applicable | — |
 | `isGranted`, `isDenied`, `isRestricted`, `isLimited`, `isPermanentlyDenied`, `isProvisional` | none as sugar (compare the `Status` value directly) | Not applicable | — |
 | `PermissionWithService.serviceStatus`, `ServiceStatus` (`disabled`/`enabled`/`notApplicable`) | no service query (a global service off, such as location services or the Windows privacy toggle, surfaces as `ERR_PERMISSIONS_SERVICE_DISABLED` from check and request; the radio's own state is not queryable) | Not applicable | `windows_privacy_disabled_reports_service_disabled` |
 | `isDisabled`, `isEnabled`, `isNotApplicable` (`ServiceStatusGetters`, `FutureServiceStatusGetters`) | none as sugar (there is no service query to sugar over; a global service off surfaces as `ERR_PERMISSIONS_SERVICE_DISABLED`) | Not applicable | `windows_privacy_disabled_reports_service_disabled` |
-| `openAppSettings()` | `open_settings(kind)` / `openSettings(kind)` (adapted: keyed by kind; the web refuses; the platform seam is the NSH integration point) | Implemented (CI pending) | `web_unsupported_kinds_are_coded`; the facade once-only tests |
-| `Permission.byValue`, `values`, `toString` | `kind_wire_name` / `kind_from_wire`, `isPermission` (TypeScript) (adapted: wire strings, not ints; an unknown string is a coded error) | Implemented (CI pending) | `unknown_kind_string_is_refused`; `kind_wire_names_round_trip` |
+| `openAppSettings()` | `open_settings(kind)` / `openSettings(kind)` (adapted: keyed by kind; the web refuses; the platform seam is the NSH integration point) | Implemented (CI green) | `web_unsupported_kinds_are_coded`; the facade once-only tests |
+| `Permission.byValue`, `values`, `toString` | `kind_wire_name` / `kind_from_wire`, `isPermission` (TypeScript) (adapted: wire strings, not ints; an unknown string is a coded error) | Implemented (CI green) | `unknown_kind_string_is_refused`; `kind_wire_names_round_trip` |
 
 ## 3. `react-native-permissions`
 
@@ -193,38 +193,38 @@ RN names each permission by a full platform string (`PERMISSIONS.IOS.CAMERA` is 
 
 | RN | Here | Status | Covered by |
 |---|---|---|---|
-| `APP_TRACKING_TRANSPARENCY` | `AppTrackingTransparency` (same meaning; apple only) | Implemented (CI pending) | `support_matrix_matches_the_spec` |
-| `BLUETOOTH` | `Bluetooth` | Implemented (CI pending) | `support_matrix_matches_the_spec` |
-| `CALENDARS` | `Calendar` | Implemented (CI pending) | `support_matrix_matches_the_spec` |
-| `CALENDARS_WRITE_ONLY` | `Calendar` (adapted: the write-only/full split is not modelled) | Implemented (CI pending) | `support_matrix_matches_the_spec` |
-| `CAMERA` | `Camera` | Implemented (CI pending) | `support_matrix_matches_the_spec` |
-| `CONTACTS` | `Contacts` | Implemented (CI pending) | `support_matrix_matches_the_spec` |
+| `APP_TRACKING_TRANSPARENCY` | `AppTrackingTransparency` (same meaning; apple only) | Implemented (CI green) | `support_matrix_matches_the_spec` |
+| `BLUETOOTH` | `Bluetooth` | Implemented (CI green) | `support_matrix_matches_the_spec` |
+| `CALENDARS` | `Calendar` | Implemented (CI green) | `support_matrix_matches_the_spec` |
+| `CALENDARS_WRITE_ONLY` | `Calendar` (adapted: the write-only/full split is not modelled) | Implemented (CI green) | `support_matrix_matches_the_spec` |
+| `CAMERA` | `Camera` | Implemented (CI green) | `support_matrix_matches_the_spec` |
+| `CONTACTS` | `Contacts` | Implemented (CI green) | `support_matrix_matches_the_spec` |
 | `FACE_ID` | none (not a data permission) | Not this release | section 4 |
-| `LOCATION_ALWAYS` | `LocationAlways` | Implemented (CI pending) | `support_matrix_matches_the_spec` |
-| `LOCATION_WHEN_IN_USE` | `LocationWhenInUse` | Implemented (CI pending) | `support_matrix_matches_the_spec` |
-| `MEDIA_LIBRARY` | `MediaLibrary` | Implemented (CI pending) | `support_matrix_matches_the_spec` |
-| `MICROPHONE` | `Microphone` | Implemented (CI pending) | `support_matrix_matches_the_spec` |
-| `MOTION` | `Motion` (same name) | Implemented (CI pending) | `support_matrix_matches_the_spec` |
-| `PHOTO_LIBRARY` | `Photos` (`permission_handler`'s name) | Implemented (CI pending) | `support_matrix_matches_the_spec` |
-| `PHOTO_LIBRARY_ADD_ONLY` | `PhotosAddOnly` | Implemented (CI pending) | `support_matrix_matches_the_spec` |
-| `REMINDERS` | `Reminders` | Implemented (CI pending) | `support_matrix_matches_the_spec` |
+| `LOCATION_ALWAYS` | `LocationAlways` | Implemented (CI green) | `support_matrix_matches_the_spec` |
+| `LOCATION_WHEN_IN_USE` | `LocationWhenInUse` | Implemented (CI green) | `support_matrix_matches_the_spec` |
+| `MEDIA_LIBRARY` | `MediaLibrary` | Implemented (CI green) | `support_matrix_matches_the_spec` |
+| `MICROPHONE` | `Microphone` | Implemented (CI green) | `support_matrix_matches_the_spec` |
+| `MOTION` | `Motion` (same name) | Implemented (CI green) | `support_matrix_matches_the_spec` |
+| `PHOTO_LIBRARY` | `Photos` (`permission_handler`'s name) | Implemented (CI green) | `support_matrix_matches_the_spec` |
+| `PHOTO_LIBRARY_ADD_ONLY` | `PhotosAddOnly` | Implemented (CI green) | `support_matrix_matches_the_spec` |
+| `REMINDERS` | `Reminders` | Implemented (CI green) | `support_matrix_matches_the_spec` |
 | `SIRI` | none (SiriKit, section 4) | Not this release | section 4 |
-| `SPEECH_RECOGNITION` | `Speech` | Implemented (CI pending) | `support_matrix_matches_the_spec` |
+| `SPEECH_RECOGNITION` | `Speech` | Implemented (CI green) | `support_matrix_matches_the_spec` |
 | `STOREKIT` | none (a StoreKit entitlement, not a consent) | Not this release | section 4 |
 
 ### `PERMISSIONS.ANDROID` (40 values)
 
 | RN | Here | Status | Covered by |
 |---|---|---|---|
-| `CAMERA` | `Camera` | Implemented (CI pending) | `support_matrix_matches_the_spec` |
-| `RECORD_AUDIO` | `Microphone` (Android's name for it) | Implemented (CI pending) | `support_matrix_matches_the_spec` |
-| `ACCESS_FINE_LOCATION`, `ACCESS_COARSE_LOCATION` | `Location`, `LocationWhenInUse` (adapted: the fine/coarse split is not modelled) | Implemented (CI pending) | `support_matrix_matches_the_spec` |
-| `ACCESS_BACKGROUND_LOCATION` | `LocationAlways` | Implemented (CI pending) | `support_matrix_matches_the_spec` |
-| `READ_CALENDAR`, `WRITE_CALENDAR` | `Calendar` | Implemented (CI pending) | `support_matrix_matches_the_spec` |
-| `READ_CONTACTS`, `WRITE_CONTACTS` | `Contacts` | Implemented (CI pending) | `support_matrix_matches_the_spec` |
-| `BODY_SENSORS`, `ACTIVITY_RECOGNITION` | `Motion` (one kind for both) | Implemented (CI pending) | `support_matrix_matches_the_spec` |
-| `BLUETOOTH_SCAN`, `BLUETOOTH_ADVERTISE`, `BLUETOOTH_CONNECT` | `Bluetooth` (the granular Android 12 split folds into one kind) | Implemented (CI pending) | `support_matrix_matches_the_spec` |
-| `READ_MEDIA_IMAGES` | `Photos` | Implemented (CI pending) | `support_matrix_matches_the_spec` |
+| `CAMERA` | `Camera` | Implemented (CI green) | `support_matrix_matches_the_spec` |
+| `RECORD_AUDIO` | `Microphone` (Android's name for it) | Implemented (CI green) | `support_matrix_matches_the_spec` |
+| `ACCESS_FINE_LOCATION`, `ACCESS_COARSE_LOCATION` | `Location`, `LocationWhenInUse` (adapted: the fine/coarse split is not modelled) | Implemented (CI green) | `support_matrix_matches_the_spec` |
+| `ACCESS_BACKGROUND_LOCATION` | `LocationAlways` | Implemented (CI green) | `support_matrix_matches_the_spec` |
+| `READ_CALENDAR`, `WRITE_CALENDAR` | `Calendar` | Implemented (CI green) | `support_matrix_matches_the_spec` |
+| `READ_CONTACTS`, `WRITE_CONTACTS` | `Contacts` | Implemented (CI green) | `support_matrix_matches_the_spec` |
+| `BODY_SENSORS`, `ACTIVITY_RECOGNITION` | `Motion` (one kind for both) | Implemented (CI green) | `support_matrix_matches_the_spec` |
+| `BLUETOOTH_SCAN`, `BLUETOOTH_ADVERTISE`, `BLUETOOTH_CONNECT` | `Bluetooth` (the granular Android 12 split folds into one kind) | Implemented (CI green) | `support_matrix_matches_the_spec` |
+| `READ_MEDIA_IMAGES` | `Photos` | Implemented (CI green) | `support_matrix_matches_the_spec` |
 | `READ_MEDIA_VIDEO`, `READ_MEDIA_AUDIO` | none (media libraries beyond photos are out of scope) | Not this release | section 4 |
 | `READ_MEDIA_VISUAL_USER_SELECTED` | none (Android 14 partial photo selection is not surfaced; on apple the same user choice answers `Limited`) | Not this release | section 4 |
 | `READ_EXTERNAL_STORAGE`, `WRITE_EXTERNAL_STORAGE`, `ACCESS_MEDIA_LOCATION`, `BODY_SENSORS_BACKGROUND`, `NEARBY_WIFI_DEVICES` | none (storage and special consents) | Not this release | section 4 |
@@ -234,20 +234,20 @@ RN names each permission by a full platform string (`PERMISSIONS.IOS.CAMERA` is 
 
 | RN | Here | Status | Covered by |
 |---|---|---|---|
-| `WEBCAM` | `Camera` (Windows' name for it) | Implemented (CI pending) | `support_matrix_matches_the_spec` |
-| `MICROPHONE` | `Microphone` | Implemented (CI pending) | `support_matrix_matches_the_spec` |
-| `LOCATION` | `Location` | Implemented (CI pending) | `support_matrix_matches_the_spec` |
+| `WEBCAM` | `Camera` (Windows' name for it) | Implemented (CI green) | `support_matrix_matches_the_spec` |
+| `MICROPHONE` | `Microphone` | Implemented (CI green) | `support_matrix_matches_the_spec` |
+| `LOCATION` | `Location` | Implemented (CI green) | `support_matrix_matches_the_spec` |
 | the other 137 capability strings | none (RN mirrors Windows' whole packaged-app capability catalog; ours serves the three the matrix names) | Not this release | section 4 |
 
 ### `RESULTS`
 
 | RN | Here | Status | Covered by |
 |---|---|---|---|
-| `UNAVAILABLE` | `ERR_PERMISSIONS_UNSUPPORTED_PLATFORM` (adapted: a kind the platform does not serve is a coded error, not a status) | Implemented (CI pending) | `android_unsupported_kinds_are_coded`; `windows_unsupported_kinds_are_coded`; `linux_every_kind_is_coded_unsupported`; `web_unsupported_kinds_are_coded` |
-| `BLOCKED` | `PermanentlyDenied` (`permission_handler`'s name for it) | Implemented (CI pending) | `android_notification_denial_is_inferred_from_rationale` |
-| `DENIED` | `Denied` | Implemented (CI pending) | `status_wire_names_round_trip` |
-| `GRANTED` | `Granted` | Implemented (CI pending) | `status_wire_names_round_trip` |
-| `LIMITED` | `Limited` | Implemented (CI pending) | `ios_limited_photos_is_distinct` |
+| `UNAVAILABLE` | `ERR_PERMISSIONS_UNSUPPORTED_PLATFORM` (adapted: a kind the platform does not serve is a coded error, not a status) | Implemented (CI green) | `android_unsupported_kinds_are_coded`; `windows_unsupported_kinds_are_coded`; `linux_every_kind_is_coded_unsupported`; `web_unsupported_kinds_are_coded` |
+| `BLOCKED` | `PermanentlyDenied` (`permission_handler`'s name for it) | Implemented (CI green) | `android_notification_denial_is_inferred_from_rationale` |
+| `DENIED` | `Denied` | Implemented (CI green) | `status_wire_names_round_trip` |
+| `GRANTED` | `Granted` | Implemented (CI green) | `status_wire_names_round_trip` |
+| `LIMITED` | `Limited` | Implemented (CI green) | `ios_limited_photos_is_distinct` |
 
 RN has no `restricted`; ours adds it for Apple MDM and parental controls and Android restricted profiles.
 
@@ -255,13 +255,13 @@ RN has no `restricted`; ours adds it for Apple MDM and parental controls and And
 
 | RN | Here | Status | Covered by |
 |---|---|---|---|
-| `check(permission)` | `check(kind)` | Implemented (CI pending) | `every_kind_reaches_the_caller_with_its_code` |
-| `request(permission, rationale?)` | `request(kind)` (adapted: no rationale UI parameter; the system dialog is the only prompt, and the android bridge infers permanent denial from the rationale flag itself) | Implemented (CI pending) | `second_request_while_one_runs_is_in_progress`; `android_notification_denial_is_inferred_from_rationale` |
+| `check(permission)` | `check(kind)` | Implemented (CI green) | `every_kind_reaches_the_caller_with_its_code` |
+| `request(permission, rationale?)` | `request(kind)` (adapted: no rationale UI parameter; the system dialog is the only prompt, and the android bridge infers permanent denial from the rationale flag itself) | Implemented (CI green) | `second_request_while_one_runs_is_in_progress`; `android_notification_denial_is_inferred_from_rationale` |
 | `checkMultiple(permissions)` | not a method (compose over check; every call resolves once within its deadline) | Not applicable | `a_call_resolves_exactly_once` |
 | `requestMultiple(permissions)` | not a method (same over request; the same kind twice answers `ERR_PERMISSIONS_IN_PROGRESS`) | Not applicable | `second_request_while_one_runs_is_in_progress` |
-| `openSettings(type?)` | `openSettings(kind)` (adapted: keyed by kind, not a settings-screen type; the web refuses) | Implemented (CI pending) | `web_unsupported_kinds_are_coded` |
-| `checkNotifications()` | `check("notifications")` (adapted: a `Status`, not a settings object) | Implemented (CI pending) | `support_matrix_matches_the_spec` |
-| `requestNotifications(options?, rationale?)` | `request("notifications")` (adapted: the alert/badge/sound options are not modelled; a dismissed dialog answers `Denied`; RN's Windows bridge answers request with a check, which matches our no-dialog adaptation there) | Implemented (CI pending) | `web_notification_dismissed_is_denied` |
+| `openSettings(type?)` | `openSettings(kind)` (adapted: keyed by kind, not a settings-screen type; the web refuses) | Implemented (CI green) | `web_unsupported_kinds_are_coded` |
+| `checkNotifications()` | `check("notifications")` (adapted: a `Status`, not a settings object) | Implemented (CI green) | `support_matrix_matches_the_spec` |
+| `requestNotifications(options?, rationale?)` | `request("notifications")` (adapted: the alert/badge/sound options are not modelled; a dismissed dialog answers `Denied`; RN's Windows bridge answers request with a check, which matches our no-dialog adaptation there) | Implemented (CI green) | `web_notification_dismissed_is_denied` |
 | `NotificationSettings` | none (the notification permission is one status here) | Not this release | section 4 |
 | `LocationAccuracy`, `LocationAccuracyOptions` (`checkLocationAccuracy`, `requestLocationAccuracy`) | none (accuracy is neither queried nor requested) | Not this release | section 4 |
 
