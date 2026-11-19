@@ -42,8 +42,8 @@ pub trait AndroidRaw: Send + Sync {
     fn open_settings(&self, kind: Permission) -> BackendFuture<'_, Result<(), PermissionsError>>;
 }
 
-/// The production seam, and the NSH-host integration point. NSH 0.4.0 ships no permission
-/// bridge, so every call reports `BridgeUnavailable` — a coded setup failure, never a silent
+/// The production seam, and the NSH-host integration point. NSH 0.6.0 has no permission
+/// call beyond notifications (`platform/notifications.rs` serves those), so every call here reports `BridgeUnavailable` — a coded setup failure, never a silent
 /// denial. The host integration replaces these bodies.
 pub struct NshAndroidRaw;
 

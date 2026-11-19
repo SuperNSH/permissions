@@ -6,7 +6,7 @@ Verified by CI: run 44376370620 on master (https://github.com/SuperNSH/permissio
 
 Status words:
 
-- **Implemented (CI green)**: coded, with the named test passing in the run above. The platform bridges are pure logic this release: every mapping is tested against a scripted raw seam, and every production seam (the NSH host integration point) answers `ERR_PERMISSIONS_BRIDGE_UNAVAILABLE`, so no device has answered anything yet. A missing bridge is a coded error, never a silent `denied`.
+- **Implemented (CI green)**: coded, with the named test passing in the run above. The platform bridges are pure logic this release: every mapping is tested against a scripted raw seam, and every production seam (the NSH host integration point) answers `ERR_PERMISSIONS_BRIDGE_UNAVAILABLE`, so no device has answered anything yet. The exception is notifications on Apple, Android and the web, which go through NSH 0.6.0's own permission calls (`platform/notifications.rs`; tests `nsh_answers_map_to_the_shared_statuses`, `notifications_check_asks_nsh_and_never_prompts`, `notifications_request_shows_nsh_prompt_and_reports_its_answer`, `a_refused_notification_prompt_is_permanent`, `other_kinds_and_settings_go_to_the_platform_bridge`). Those tests postdate the CI run named above, so they are unverified until CI runs them. A missing bridge is a coded error, never a silent `denied`.
 - **Not this release**: out of scope; section 4 says why and what stands in.
 - **Not applicable**: no counterpart in our API; the row says why.
 
@@ -271,7 +271,7 @@ Everything the references handle that this release intentionally does not, with 
 
 | Reference capability | Why not now | What stands in |
 |---|---|---|
-| The real OS calls behind every bridge | The NSH host integration has not landed; every production seam is coded to answer `ERR_PERMISSIONS_BRIDGE_UNAVAILABLE` rather than guess. Each platform rule above is scripted and coded, and a missing bridge is never a silent `denied` | `ERR_PERMISSIONS_BRIDGE_UNAVAILABLE` |
+| The real OS calls behind every bridge, except notifications | NSH 0.6.0 exposes only the notification permission (`nsh-core` `element/ambient.rs`); the other fifteen kinds have no host call; every production seam is coded to answer `ERR_PERMISSIONS_BRIDGE_UNAVAILABLE` rather than guess. Each platform rule above is scripted and coded, and a missing bridge is never a silent `denied` | `ERR_PERMISSIONS_BRIDGE_UNAVAILABLE` |
 | RN's detailed notification settings read (`NotificationSettings`: alert, badge, sound, carPlay, criticalAlert, provisional, providesAppSettings, lockScreen, notificationCenter) | The notification permission is one status, not a settings object | `Status` |
 | Flutter's `PermissionStatus.provisional` | The five-status model has no provisional value; the apple raw seam has no provisional variant, so no bridge implements or tests a provisional path this release | nothing |
 | RN's `LocationAccuracy` (`checkLocationAccuracy`, `requestLocationAccuracy`, `purposeKey`) | Accuracy (full/reduced) is not part of the status model | nothing; the `Location` kinds answer status only |

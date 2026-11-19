@@ -14,7 +14,7 @@ Decided 2026-11-09. The brief's research found no Rust crate that covers runtime
 
 ### Platforms in scope: apple, android, windows, linux, web
 
-Decided 2026-11-09. The first release covers every platform an NSH app ships on, with pure-logic bridges and no OS crates: the real OS bindings are the NSH-host integration point, and until the host wires them the production raw seams resolve `Err(BridgeUnavailable)`, stated honestly. That answer is coded, never panics, never hangs, and never reports a silent `denied`. Linux supports nothing by design: there is no permission broker to talk to, so every kind resolves `ERR_PERMISSIONS_UNSUPPORTED_PLATFORM` at once.
+Decided 2026-11-09. The first release covers every platform an NSH app ships on, with pure-logic bridges and no OS crates: the real OS bindings are the NSH-host integration point, and until the host wires them the production raw seams resolve `Err(BridgeUnavailable)`, stated honestly. That answer is coded, never panics, never hangs, and never reports a silent `denied`. Notifications are the exception since NSH 0.6.0: `platform/notifications.rs` wraps the Apple, Android and web bridges and answers that kind from `notification_permission` / `request_notification_permission` (`Default` reads `Denied`, `Denied` reads `PermanentlyDenied`, `Unavailable` is `ERR_PERMISSIONS_UNSUPPORTED_PLATFORM`); `open_settings` and every other kind stay with the bridge. NSH has no call for another kind. Linux supports nothing by design: there is no permission broker to talk to, so every kind resolves `ERR_PERMISSIONS_UNSUPPORTED_PLATFORM` at once.
 
 ### NSH version: nsh-core 0.6.0
 
