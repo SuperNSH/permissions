@@ -1,0 +1,8 @@
+{
+  "nsh": ">=0.6",
+  "exports": {
+    "nsh-permissions": "tsx/index.ts",
+    "nsh-permissions/rust": "tsx/rust.ts",
+    "nsh-permissions/memory": "tsx/memory.ts"
+  }
+}

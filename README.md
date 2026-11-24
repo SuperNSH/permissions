@@ -4,6 +4,18 @@ Check, request and open settings for camera, microphone, photos, location, notif
 
 Part of the Native Shell (NSH) capability set. Same layout as the other SuperNSH repos: a Rust crate, docs in `docs/`, CI on GitHub Actions, and a web status page on GitHub Pages at https://supernsh.github.io/permissions/.
 
+## Install
+
+In the app's directory:
+
+```sh
+nsh add nsh-permissions
+```
+
+`nsh add` needs NSH main or the nightly: the 0.6.0 and 0.6.1 releases do not have it. In a Rust app, `cargo add nsh-permissions` works with any of them.
+
+TSX code imports from `nsh-permissions`.
+
 ## Status
 
 **Implemented and verified by CI.** Run 44376370620 on `master` (https://github.com/SuperNSH/permissions/actions/runs/44376370620) is green on every job: `format`; `rust` on Linux, macOS and Windows (clippy `-D warnings`, `cargo test --all-targets`); `check` for aarch64-apple-ios-sim, aarch64-linux-android and wasm32-unknown-unknown; and `typescript` (`nsh check`, `nsh build` with no warnings, `nsh test`). The Rust crate in `crates/nsh-permissions` has the frozen API: 16 permission kinds, 5 statuses, 8 error codes, and the `Permissions` facade (check, request, open_settings, cancel) with the one-request-per-kind, resolve-exactly-once and deadline guarantees tested against a scripted backend. The TypeScript package in `packages/nsh-permissions` mirrors it, and every canonical test name in [docs/goals.md](docs/goals.md) exists on the side the table assigns it.
