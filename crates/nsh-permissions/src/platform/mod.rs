@@ -16,7 +16,7 @@ use crate::backend::PermissionBackend;
 /// The backend of the target this build runs on.
 ///
 /// The `cfg!` chain keeps every bridge compiled and referenced on every host, so no bridge goes
-/// untested on the machines that run CI. Notifications are the one kind NSH 0.6.0 answers itself,
+/// untested on the machines that run CI. Notifications are the one kind NSH 0.7.1 answers itself,
 /// so Apple, Android and the web serve them through `notifications::via_nsh`.
 pub(crate) fn default_backend() -> Arc<dyn PermissionBackend> {
     if cfg!(target_vendor = "apple") {

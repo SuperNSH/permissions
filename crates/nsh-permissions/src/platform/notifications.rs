@@ -1,4 +1,4 @@
-//! Notifications through NSH's own permission calls, the one kind NSH 0.6.0 serves.
+//! Notifications through NSH's own permission calls, the one kind NSH 0.7.1 serves.
 //!
 //! `notification_permission` and `request_notification_permission` (`nsh-core`'s ambient calls,
 //! `element/ambient.rs`) answer on iOS, macOS, Android and the web. NSH has no other permission

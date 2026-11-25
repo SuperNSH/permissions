@@ -16,9 +16,9 @@ Decided 2026-11-09. The brief's research found no Rust crate that covers runtime
 
 Decided 2026-11-09. The first release covers every platform an NSH app ships on, with pure-logic bridges and no OS crates: the real OS bindings are the NSH-host integration point, and until the host wires them the production raw seams resolve `Err(BridgeUnavailable)`, stated honestly. That answer is coded, never panics, never hangs, and never reports a silent `denied`. Notifications are the exception since NSH 0.6.0: `platform/notifications.rs` wraps the Apple, Android and web bridges and answers that kind from `notification_permission` / `request_notification_permission` (`Default` reads `Denied`, `Denied` reads `PermanentlyDenied`, `Unavailable` is `ERR_PERMISSIONS_UNSUPPORTED_PLATFORM`); `open_settings` and every other kind stay with the bridge. NSH has no call for another kind. Linux supports nothing by design: there is no permission broker to talk to, so every kind resolves `ERR_PERMISSIONS_UNSUPPORTED_PLATFORM` at once.
 
-### NSH version: nsh-core 0.6.0
+### NSH version: nsh-core 0.7.0
 
-Decided 2026-11-09 on 0.4.0; moved to 0.5.0 on 2026-11-12 with the sibling libraries, and to 0.5.1 on 2026-11-17, and to 0.6.0 on 2026-11-18. Every SuperNSH library pins `nsh-core = "0.6.0"`, with `nsh-engine` and `nsh-testing` 0.6.0 as dev-dependencies where it has them. This crate matches them, so the native module, the headless test driver and the TSX package all line up with the same engine.
+Decided 2026-11-09 on 0.4.0; moved to 0.5.0 on 2026-11-12 with the sibling libraries, and to 0.5.1 on 2026-11-17, and to 0.6.0 on 2026-11-18, and to 0.7.0 on 2026-11-25. Every SuperNSH library pins `nsh-core = "0.7.0"`, with `nsh-engine` and `nsh-testing` 0.7.0 as dev-dependencies where it has them. This crate matches them, so the native module, the headless test driver and the TSX package all line up with the same engine.
 
 ### The Android rationale rule was amended
 
