@@ -12,7 +12,7 @@ In the app's directory:
 nsh add nsh-permissions
 ```
 
-`nsh add` needs NSH 0.7.0 or later: the 0.6.x releases do not have it.
+Needs NSH 0.7.1 or later.
 
 TSX code imports from `nsh-permissions`.
 
